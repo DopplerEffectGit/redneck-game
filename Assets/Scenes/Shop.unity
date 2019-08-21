@@ -629,7 +629,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 864218072}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.37556812
+  m_Size: 0.37556815
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1621,7 +1621,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1440127822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7362863dd5f4940948fcd21625af0c2b, type: 3}
+  m_Script: {fileID: 11500000, guid: 3eb1bf605610c4b389b4a87a53db76b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!224 &1440127824
@@ -2103,7 +2103,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 3.05
   m_canvasRenderer: {fileID: 2037050472}
   m_TextComponent: {fileID: 2106733897}
   m_materialReferenceIndex: 1
