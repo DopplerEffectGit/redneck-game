@@ -17,7 +17,25 @@ public class GamePreferences : MonoBehaviour
     //        characterData = LoadCharacter(0);
     //}
 
-   
+    static void saveVolume(int volumeOn) {
+        PlayerPrefs.SetInt("volumeOn", volumeOn);
+        PlayerPrefs.Save();
+    }
+    static int getVolume(){return PlayerPrefs.GetInt("volumeOn");}
+
+    static void saveMusicLevel(float musicLevel)
+    {
+        PlayerPrefs.SetFloat("musicLevel", musicLevel);
+        PlayerPrefs.Save();
+    }
+    static float getMusicLevel(){return PlayerPrefs.GetFloat("musicLevel");}
+
+    static void saveSfxLevel(float sfxLevel)
+    {
+        PlayerPrefs.SetFloat("sfxLevel", sfxLevel);
+        PlayerPrefs.Save();
+    }
+    static float getSfxLevel(){return PlayerPrefs.GetFloat("sfxLevel");}
 
 
     static void saveLevel(Level level, int levelNumber)
@@ -66,4 +84,5 @@ public class GamePreferences : MonoBehaviour
 
         return new Level(number, stage, available, rating, complexity, enemyList);
     }
+
 }

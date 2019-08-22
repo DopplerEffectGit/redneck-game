@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
@@ -10,13 +8,46 @@ public class MainMenu : MonoBehaviour {
     private static int GAME = 2;
     private static int SHOP = 3;
 
-    public void openShop() {
+    GameObject collaiderLayout;
+    GameObject ufo;
+    UfoModel ufoModel;
+    int animationKey;
 
-        //SceneManager.GetSceneByName("Shop");
-        SceneManager.LoadScene(SHOP);
+
+    private void Start()
+    {
+        collaiderLayout = GameObject.Find("collaiderLayout");
+        if (collaiderLayout == null) {
+            Debug.Log("its null");
+
+        }
+
+        ufoModel = new UfoModel(GameObject.Find("ufo"));
+        animationKey = UfoModel.ANIMATION_FLY;
     }
 
-    public void openLevelSelect() {
-        SceneManager.LoadScene(LEVEL_SELECT);
+    void Update() {
+        ufoModel.onUpdate(animationKey);
+        //Debug.Log("update: ");
     }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        Debug.Log("collapse: " + collision.gameObject.name + "!=====");
+
+        if (collision.gameObject.name == "ufo")
+        {
+            animationKey = UfoModel.ANIMATION_COW;//ufoModel.onUpdate(UfoModel.ANIMATION_COW);
+            //GameObject.Find("collaiderLayout").SetActive(false);
+            collaiderLayout.GetComponent<BoxCollider2D>().isTrigger = false;
+
+        }
+        //if (collision.gameObject.name == "cow") animationKey = UfoModel.ANIMATION_SNEAK;//ufoModel.onUpdate(UfoModel.ANIMATION_COW);
+
+
+    }
+
+    public void openShop() {SceneManager.LoadScene(SHOP);}
+    public void openLevelSelect() {SceneManager.LoadScene(LEVEL_SELECT);}   
 }
