@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour {
@@ -10,53 +11,104 @@ public class MainMenu : MonoBehaviour {
 
     GameObject collaiderLayout;
     GameObject bottomCollaider;
-    GameObject ufo;
-    UfoModel ufoModel;
-    int animationKey;
 
+    public GameObject ufo;
+    private GameObject prefabInstantiation;
+    //UfoModel ufoModel;
 
+    float respawnTime = -1;
     private void Start()
     {
+        //var back = GameObject.Find("background");
+
+        //prefabInstantiation = Instantiate(ufo, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        //prefabInstantiation.transform.parent = back.transform;
+
+
+        //float timeLeft = Random.Range(1, 4);
+       // StartCoroutine(StartCountdown(timeLeft));
+
+
         collaiderLayout = GameObject.Find("collaiderLayout");
         bottomCollaider = GameObject.Find("bottomCollaider");
-
-
-        ufoModel = new UfoModel(GameObject.Find("ufo"));
-        animationKey = UfoModel.ANIMATION_FLY;
     }
 
     void Update() {
-        ufoModel.onUpdate(animationKey);
-        //Debug.Log("update: ");
-    }
+        Debug.Log("Main update Countdown: " + respawnTime);
 
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-
-        Debug.Log("collapse: " + collision.gameObject.name + "!=====");
-
-        if (collision.gameObject.name == "ufo")
+        respawnTime -= Time.deltaTime;
+        if (respawnTime < 0)
         {
-            animationKey = UfoModel.ANIMATION_COW;//ufoModel.onUpdate(UfoModel.ANIMATION_COW);
-            collaiderLayout.GetComponent<BoxCollider2D>().isTrigger = false;
-
+            respawnTime = 10;
+            spawnUfo();
         }
+    }
 
+    private void spawnUfo() {
+
+        var back = GameObject.Find("background");
+        prefabInstantiation = Instantiate(ufo, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        prefabInstantiation.transform.parent = back.transform;
+        float timeLeft = Random.Range(3, 4);
+        StartCoroutine(StartCountdown(timeLeft));
+    }
+
+
+
+    
+    float currCountdownValue;
+    public IEnumerator StartCountdown(float countdownValue)
+    {
+        currCountdownValue = countdownValue;
+        while (currCountdownValue > 0)
+        {
+            
+            Debug.Log("Countdown: " + currCountdownValue);
+            yield return new WaitForSeconds(1.0f);
+            currCountdownValue--;
+            if (currCountdownValue == 0) {
+                startUfoAction();
+            }
+        }
+    }
+
+    private void startUfoAction() {
+        switch (randomNumber())
+        {
+            case 1: prefabInstantiation.gameObject.GetComponent<Ufo>().SetBehavour(Ufo.BEHAVOUR_1); break;
+            case 2: prefabInstantiation.gameObject.GetComponent<Ufo>().SetBehavour(Ufo.BEHAVOUR_2); break;
+            case 3: break;
+        }
+    }
+
+    private int randomNumber() {
+        int number = Random.Range(1, 3);
+        Debug.Log("random number: " + number);
+        return number;
+        //return 2;
 
     }
 
-    public void cowArrived() {
-        Debug.Log("ARRIVED");
-        animationKey = UfoModel.ANIMATION_SNEAK;
-    }
+    //void OnTriggerEnter2D(Collider2D collision)
+    //{
 
-    public void ufoOut() {
-        bottomCollaider.GetComponent<BoxCollider2D>().isTrigger = false;
+    //    Debug.Log("collapse: " + collision.gameObject.name + "!=====");
 
-        Debug.Log("ufoOut!");
-       animationKey = UfoModel.ANIMATION_AWAY;
+    //    if (collision.gameObject.name == "ufo")
+    //    {
+    //        collaiderLayout.GetComponent<BoxCollider2D>().isTrigger = false;
+    //    }
+    //}
 
-    }
+    //public void cowArrived() {
+    //    Debug.Log("ARRIVED");
+    //}
+
+    //public void ufoOut() {
+
+    //    Debug.Log("ufoOut!");
+
+    //}
 
 
     public void openShop() {SceneManager.LoadScene(SHOP);}
