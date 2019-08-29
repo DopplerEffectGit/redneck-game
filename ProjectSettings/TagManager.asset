@@ -41,3 +41,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: background
+    uniqueID: 1588936367
+    locked: 0
+  - name: ground
+    uniqueID: 2881957207
+    locked: 0
+  - name: zabor
+    uniqueID: 414901157
+    locked: 0
+  - name: hero
+    uniqueID: 3729867819
+    locked: 0
+  - name: enemy
+    uniqueID: 4139989747
+    locked: 0
