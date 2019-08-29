@@ -79,7 +79,7 @@ public class GamePreferences : MonoBehaviour
             int enemyStage = PlayerPrefs.GetInt(levelNumber + "_level_enemy_" + i + "_stage");
             int behevour = PlayerPrefs.GetInt(levelNumber + "_level_enemy_" + i + "_behevour");
 
-            enemyList.Add(new Enemy(name, health, demage, enemyStage, behevour));
+            //enemyList.Add(new Enemy(name, health, demage, enemyStage, behevour));
         }
 
         return new Level(number, stage, available, rating, complexity, enemyList);
