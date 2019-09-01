@@ -45,10 +45,13 @@ public class Enemy : MonoBehaviour
         movement = Input.GetAxis("Horizontal");
         if (movement > 0f)
         {
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
             rigidBody.velocity = new Vector2(movement * speed, rigidBody.velocity.y);
         }
         else if (movement < 0f)
         {
+
+            transform.localRotation = Quaternion.Euler(0, 0, 0);
             rigidBody.velocity = new Vector2(movement * speed, rigidBody.velocity.y);
         }
         else
@@ -59,7 +62,7 @@ public class Enemy : MonoBehaviour
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
         }
-        playerAnimation.SetFloat("Speed", Mathf.Abs(rigidBody.velocity.x));
-        playerAnimation.SetBool("OnGround", isTouchingGround);
+        playerAnimation.SetFloat("speed", Mathf.Abs(rigidBody.velocity.x));
+        playerAnimation.SetBool("onGround", isTouchingGround);
     }
 }

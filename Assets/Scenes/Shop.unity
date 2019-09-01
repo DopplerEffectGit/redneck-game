@@ -248,7 +248,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 218.42183
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -272,11 +272,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 211234062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 357, y: 223, z: -10}
+  m_LocalScale: {x: 6.74614, y: 1.6454, z: 1.6454}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &226991642
 GameObject:
@@ -628,8 +628,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 864218073}
   m_HandleRect: {fileID: 864218072}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.37556815
+  m_Value: 1.0000001
+  m_Size: 0.37556812
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -767,7 +767,7 @@ RectTransform:
   - {fileID: 2106733896}
   - {fileID: 1440127824}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2103,7 +2103,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 3.05
+  m_padding: 1.25
   m_canvasRenderer: {fileID: 2037050472}
   m_TextComponent: {fileID: 2106733897}
   m_materialReferenceIndex: 1
@@ -2179,7 +2179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2069976469
 GameObject:

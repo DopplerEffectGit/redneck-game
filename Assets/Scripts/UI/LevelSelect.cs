@@ -30,9 +30,9 @@ public class LevelSelect : MonoBehaviour {
 
             level.transform.SetParent(grid.transform);
         }
+
+
         
-
-
 
 
     }
