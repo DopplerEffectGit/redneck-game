@@ -40,7 +40,7 @@ public class Ufo : MonoBehaviour
         scenario2StartPositionX = (int)(-Screen.width/3);
         scenario2StartPositionY = (int)(Screen.height / 2.5f);
 
-        Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3((float)Screen.width / 2f, (float)Screen.height / 2f, 10));
+        //Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3((float)Screen.width / 2f, (float)Screen.height / 2f, 10));
 
         //ufoObject = GameObject.Find("ufo");
         //gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
