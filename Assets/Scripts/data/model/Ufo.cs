@@ -192,6 +192,9 @@ public class Ufo : MonoBehaviour
 
     private void ufoEscape()
     {
+
+        
+
         int direction = 0;
 
         switch (behavour) {
@@ -204,6 +207,19 @@ public class Ufo : MonoBehaviour
         var ufoPosition = gameObject.transform.position;
         ufoPosition.x = ufoPosition.x + direction;
         gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, ufoPosition, ufoSpeed * Time.deltaTime);
+
+        if (behavour == 1)
+        {
+            if (ufoPosition.x < -100) {
+                Destroy(gameObject);
+            }
+        }
+        else {
+            if (ufoPosition.x > Screen.width + 100)
+            {
+                Destroy(gameObject);
+            }
+        }
 
     }
 

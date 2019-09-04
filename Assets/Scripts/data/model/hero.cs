@@ -14,9 +14,13 @@ public class hero : MonoBehaviour
     public LayerMask groundLayer;
     private bool isTouchingGround;
     private Animator playerAnimation;
+
+    public BoxCollider2D groundCollider;
     // Use this for initialization
     void Start()
     {
+        groundCollider = transform.GetChild(0).GetComponent<BoxCollider2D>();
+
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         playerAnimation = GetComponent<Animator>();
@@ -51,6 +55,15 @@ public class hero : MonoBehaviour
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
         }
         playerAnimation.SetFloat("speed", Mathf.Abs(rigidBody.velocity.x));
-        playerAnimation.SetBool("onGround", isTouchingGround);
+        //playerAnimation.SetBool("onGround", isTouchingGround);
     }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("OnTriggerEnter2D: " + other.name);
+
+        
+    }
+
+
 }
