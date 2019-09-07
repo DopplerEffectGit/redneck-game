@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Shop.unity
     guid: 480b42d7004eb48f284b8c47a8c232e9
+  - enabled: 1
+    path: Assets/Scenes/new_new_grigorill.unity
+    guid: 6f7e47bf7ea757b40b730c6a0ff27344
   m_configObjects: {}

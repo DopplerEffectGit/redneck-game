@@ -13,9 +13,9 @@ public class hero : MonoBehaviour
     private Animator playerAnimation;
     private bool onGround;
 
-    public Button buttonLeft;
-    public Button buttonRight;
-    public Button buttonJump;
+    //public Button buttonLeft;
+    //public Button buttonRight;
+    //public Button buttonJump;
 
     // Use this for initialization
     void Start()
@@ -29,11 +29,11 @@ public class hero : MonoBehaviour
 
 
 
-        buttonLeft.onClick.AddListener(delegate () {
+        //buttonLeft.onClick.AddListener(delegate () {
 
-            Debug.Log("left button ");
+        //    Debug.Log("left button ");
 
-        });
+        //});
 
 
 
