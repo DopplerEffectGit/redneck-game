@@ -109,11 +109,7 @@ public class hero : MonoBehaviour
         }
     }
 
-    public void leftButtonClick() {
-        Debug.Log("left button ");
-
-
-    }
+   
 
     public void rightButtonClick()
     {
@@ -142,4 +138,10 @@ public class hero : MonoBehaviour
 
     //}
 
+ public void leftButtonClick()
+    {
+        Debug.Log("left button ");
+
+
+    }
 }
