@@ -13,7 +13,7 @@ public class hero : MonoBehaviour
     private Animator playerAnimation;
     private bool onGround;
 
-    //public Button buttonLeft;
+    public Button buttonLeft;
     //public Button buttonRight;
     //public Button buttonJump;
 
@@ -29,12 +29,16 @@ public class hero : MonoBehaviour
 
 
 
-        //buttonLeft.onClick.AddListener(delegate () {
+        //buttonLeft.onClick.AddListener(delegate ()
+        //{
 
-        //    Debug.Log("left button ");
+        //    Debug.Log("left button! ");
 
         //});
+        //buttonLeft.OnPointerClick.lis
 
+        //buttonLeft.OnPointerClick(EventSystems.PointerEventData eventData){
+        //}
 
 
         //buttonLeft = (Instantiate(button) as Button).gameObject;
@@ -53,8 +57,8 @@ public class hero : MonoBehaviour
     void Update()
     {
         //Debug.Log("hero update");
+        //movement = Input.GetAxis("Horizontal");// разкомментить чтобы управлять  клавиатурой
 
-        movement = Input.GetAxis("Horizontal");
         if (movement > 0f)
         {
             transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -80,6 +84,8 @@ public class hero : MonoBehaviour
         playerAnimation.SetBool("onGround", onGround);
 
     }
+
+
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -109,39 +115,37 @@ public class hero : MonoBehaviour
         }
     }
 
-   
-
-    public void rightButtonClick()
-    {
-        Debug.Log("right button ");
-
-
-    }
     public void jumpButtonClick()
     {
-        Debug.Log("jump button ");
-
+        if (onGround) {
+            Debug.Log("jump button ");
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
+        }
+        
 
     }
-    //void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    Debug.Log("OnTriggerEnter2D: " + other.name);
 
-
-    //}
-
-
-    //void OnTriggerExit2D(Collider2D collider)
-    //{
-    //    //Debug.Log("OnTriggerExit2D Here!");
-    //    print("No longer in contact with " + collider.transform.name);
-
-    //}
-
- public void leftButtonClick()
+    public void leftButtonDown()
     {
-        Debug.Log("left button ");
+        Debug.Log("left down ");
+        movement = -1f;
+    }
 
+    public void leftButtonUp()
+    {
+        Debug.Log("left up ");
+        movement = 0;
+    }
 
+    public void rightButtonDown()
+    {
+        Debug.Log("right down ");
+        movement = 1f;
+    }
+
+    public void rightButtonUp()
+    {
+        Debug.Log("right up ");
+        movement = 0;
     }
 }
