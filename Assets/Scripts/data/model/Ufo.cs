@@ -12,10 +12,10 @@ public class Ufo : MonoBehaviour
     public int behavour = 0;
 
     public static int scenario1StartPositionX = 1000;
-    public static int scenario1StartPositionY = 100;
+    public static int scenario1StartPositionY = 500;
 
-    public static int scenario2StartPositionX = -30;
-    public static int scenario2StartPositionY = 80;
+    public static int scenario2StartPositionX = -100;
+    public static int scenario2StartPositionY = 200;
 
     bool cowArrived = false;
     bool lightBlinkAnimationEnabled = false;
@@ -34,11 +34,11 @@ public class Ufo : MonoBehaviour
         light = gameObject.transform.GetChild(1).gameObject;
          cow = gameObject.transform.GetChild(2).gameObject;
 
-        scenario1StartPositionX = (int)(Screen.width);
-        scenario1StartPositionY = (int)(Screen.height/2.5f);
+        scenario1StartPositionX = (int)(Screen.width-20f);
+        scenario1StartPositionY = (int)(Screen.height/1.5f);
 
-        scenario2StartPositionX = (int)(-Screen.width/3);
-        scenario2StartPositionY = (int)(Screen.height / 2.5f);
+        scenario2StartPositionX = (int)(-Screen.width-100f);
+        scenario2StartPositionY = (int)(Screen.height /5f);
 
         //Vector3 worldPos = Camera.main.ScreenToWorldPoint(new Vector3((float)Screen.width / 2f, (float)Screen.height / 2f, 10));
 

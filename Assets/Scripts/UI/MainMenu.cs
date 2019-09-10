@@ -39,7 +39,7 @@ public class MainMenu : MonoBehaviour {
         respawnTime -= Time.deltaTime;
         if (respawnTime < 0)
         {
-            respawnTime = 10;
+            respawnTime = 30;
             spawnUfo();
         }
     }
@@ -47,9 +47,9 @@ public class MainMenu : MonoBehaviour {
     private void spawnUfo() {
 
         var back = GameObject.Find("background");
-        prefabInstantiation = Instantiate(ufo, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
+        prefabInstantiation = Instantiate(ufo, new Vector3(10, 3, 0), Quaternion.identity) as GameObject;
         prefabInstantiation.transform.parent = back.transform;
-        float timeLeft = Random.Range(3, 4);
+        float timeLeft = Random.Range(5, 7);
         StartCoroutine(StartCountdown(timeLeft));
     }
 

@@ -7,6 +7,7 @@ TagManager:
   - buttonLeft
   - buttonRight
   - buttonJump
+  - coin
   layers:
   - Default
   - TransparentFX
