@@ -41,7 +41,6 @@ public class GamePreferences : MonoBehaviour
     static void saveLevel(Level level, int levelNumber)
     {
         PlayerPrefs.SetInt(levelNumber + "_level_number", level.number);
-        PlayerPrefs.SetInt(levelNumber + "_level_stage", level.stage);
         PlayerPrefs.SetInt(levelNumber + "_level_avalible", level.available);
         PlayerPrefs.SetInt(levelNumber + "_level_rating", level.rating);
         PlayerPrefs.SetInt(levelNumber + "_level_complexity", level.complexity);
@@ -53,8 +52,7 @@ public class GamePreferences : MonoBehaviour
             PlayerPrefs.SetString(levelNumber + "_level_enemy_" + i + "_name", level.enemyList[i].name);
             PlayerPrefs.SetInt(levelNumber + "_level_enemy_" + i + "_health", level.enemyList[i].health);
             PlayerPrefs.SetInt(levelNumber + "_level_enemy_" + i + "_demage", level.enemyList[i].demage);
-            PlayerPrefs.SetInt(levelNumber + "_level_enemy_" + i + "_stage", level.enemyList[i].stage);
-            PlayerPrefs.SetInt(levelNumber + "_level_enemy_" + i + "_behevour", level.enemyList[i].behevour);
+            PlayerPrefs.SetInt(levelNumber + "_level_enemy_" + i + "_behevour", level.enemyList[i].behavour);
         }
 
         PlayerPrefs.Save();

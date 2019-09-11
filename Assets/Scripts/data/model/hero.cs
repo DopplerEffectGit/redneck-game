@@ -13,7 +13,8 @@ public class hero : MonoBehaviour
     private Animator playerAnimation;
     private bool onGround;
 
-    public Button buttonLeft;
+
+    //public Button buttonLeft;
     //public Button buttonRight;
     //public Button buttonJump;
 
@@ -24,32 +25,6 @@ public class hero : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         playerAnimation = GetComponent<Animator>();
-
-
-
-
-
-        //buttonLeft.onClick.AddListener(delegate ()
-        //{
-
-        //    Debug.Log("left button! ");
-
-        //});
-        //buttonLeft.OnPointerClick.lis
-
-        //buttonLeft.OnPointerClick(EventSystems.PointerEventData eventData){
-        //}
-
-
-        //buttonLeft = (Instantiate(button) as Button).gameObject;
-
-        //buttonLeft = GameObject.FindGameObjectWithTag("buttonLeft");
-        //buttonLeft = gameObject.GetComponent<Text>().text;
-
-
-        //buttonLeft = GameObject.FindGameObjectWithTag("buttonLeft") as Button;
-
-
 
     }
 
@@ -80,24 +55,27 @@ public class hero : MonoBehaviour
 
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
         }
+
         playerAnimation.SetFloat("speed", Mathf.Abs(rigidBody.velocity.x));
         playerAnimation.SetBool("onGround", onGround);
-
     }
 
 
 
     void OnCollisionStay2D(Collision2D col)
     {
+
         if (
             col.transform.name.Contains("road") ||
             col.transform.name.Contains("box") ||
             col.transform.name.Contains("platform")) 
         {
             Debug.Log("OnCollisionEnter2D " + col.transform.name);
-
             onGround = true;
+        }
 
+        if (col.transform.name.Contains("platform")) {
+            transform.parent = col.transform;
         }
 
     }
@@ -111,7 +89,11 @@ public class hero : MonoBehaviour
         {
             Debug.Log("OnCollisionExit2D " + col.transform.name);
             onGround = false; 
+        }
 
+        if (col.transform.name.Contains("platform"))
+        {
+            transform.parent = null;
         }
     }
 
