@@ -12,6 +12,7 @@ public class hero : MonoBehaviour
     private Rigidbody2D rigidBody;
     private Animator playerAnimation;
     private bool onGround;
+    public ParticleSystem dust;    
 
 
     //public Button buttonLeft;
@@ -77,6 +78,10 @@ public class hero : MonoBehaviour
         if (col.transform.name.Contains("platform")) {
             transform.parent = col.transform;
         }
+        if (col.transform.name.Contains("pika"))
+        {
+            rigidBody.constraints = RigidbodyConstraints2D.None;
+        }
 
     }
 
@@ -100,6 +105,7 @@ public class hero : MonoBehaviour
     public void jumpButtonClick()
     {
         if (onGround) {
+            CreateDust();
             Debug.Log("jump button ");
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
         }
@@ -109,25 +115,33 @@ public class hero : MonoBehaviour
 
     public void leftButtonDown()
     {
+        CreateDust();
         Debug.Log("left down ");
         movement = -1f;
     }
 
     public void leftButtonUp()
     {
+        CreateDust();
         Debug.Log("left up ");
         movement = 0;
     }
 
     public void rightButtonDown()
     {
+        CreateDust();
         Debug.Log("right down ");
         movement = 1f;
     }
 
     public void rightButtonUp()
     {
+        CreateDust();
         Debug.Log("right up ");
         movement = 0;
+    }
+    void CreateDust()
+    {
+        dust.Play();
     }
 }
