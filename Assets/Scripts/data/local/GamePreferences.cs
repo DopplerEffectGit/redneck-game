@@ -44,7 +44,7 @@ public class GamePreferences : MonoBehaviour
         PlayerPrefs.SetInt(levelNumber + "_level_avalible", level.available);
         PlayerPrefs.SetInt(levelNumber + "_level_rating", level.rating);
         PlayerPrefs.SetInt(levelNumber + "_level_complexity", level.complexity);
-        PlayerPrefs.SetInt(levelNumber + "_level_enemies_list_ize", level.enemyList.Count);
+        PlayerPrefs.SetInt(levelNumber + "_level_enemies_list_size", level.enemyList.Count);
 
 
         for (int i = 0; i < level.enemyList.Count; i++)
