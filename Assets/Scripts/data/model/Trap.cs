@@ -7,7 +7,7 @@ public class Trap : MonoBehaviour
     public Rigidbody2D body2d;
     public float leftpush=-0.3f;
     public float rightpush=0.3f;
-    public float velocity=120;
+    public float velocity=320; //100
 
 
 

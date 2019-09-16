@@ -11,18 +11,15 @@ public class hero : MonoBehaviour
     private float movement = 0f;
     private Rigidbody2D rigidBody;
     private Animator playerAnimation;
+
     private bool onGround;
+    private bool attackActive = false;
     public ParticleSystem dust;    
 
-
-    //public Button buttonLeft;
-    //public Button buttonRight;
-    //public Button buttonJump;
 
     // Use this for initialization
     void Start()
     {
-
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         playerAnimation = GetComponent<Animator>();
@@ -57,12 +54,35 @@ public class hero : MonoBehaviour
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
         }
 
+
+        if (playerAnimation.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+        {
+            float animationPercent = (playerAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime % 1.0f);
+            Debug.Log(animationPercent);
+            if (animationPercent < 0.9f)
+            {
+                attackActive = true;
+            }
+            else {
+                attackActive = false;
+            }
+        }
+        else
+        {
+            attackActive = false;
+        }
+
+
+
+
+
+        playerAnimation.SetBool("shooting", attackActive);
         playerAnimation.SetFloat("speed", Mathf.Abs(rigidBody.velocity.x));
         playerAnimation.SetBool("onGround", onGround);
     }
 
 
-
+    //COLLISION DETECTION=======================================================
     void OnCollisionStay2D(Collision2D col)
     {
 
@@ -102,6 +122,8 @@ public class hero : MonoBehaviour
         }
     }
 
+    //BUTTONS=======================================================
+
     public void jumpButtonClick()
     {
         if (onGround) {
@@ -109,8 +131,13 @@ public class hero : MonoBehaviour
             Debug.Log("jump button ");
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
         }
-        
+    }
 
+    public void attackButtonClick() {
+        Debug.Log("attack button ");
+
+        attackActive = true;
+        playerAnimation.Play("attack");
     }
 
     public void leftButtonDown()
@@ -140,6 +167,10 @@ public class hero : MonoBehaviour
         Debug.Log("right up ");
         movement = 0;
     }
+
+
+
+    //
     void CreateDust()
     {
         dust.Play();
