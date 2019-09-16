@@ -4,54 +4,35 @@ using UnityEngine;
 public class Trap : MonoBehaviour
 {
 
-    private float startY;
-    private float startX;
-
-    private float width;
+    public Rigidbody2D body2d;
+    public float leftpush=-0.3f;
+    public float rightpush=0.3f;
+    public float velocity=120;
 
 
 
     void Start()
     {
 
-        startY = transform.position.y;
+        body2d = GetComponent<Rigidbody2D>();
+        body2d.angularVelocity = velocity;
 
     }
 
     void Update()
     {
-        var pos = transform.position;
-        //pos.x = startX;
-        //pos.y = startY + 10;
-
-
-       // pos.y = pos.y + 5;
-
-        //transform.position = pos;
-
-
-        //Vector3 axis = new Vector3(0, 0, 1);
-       // transform.RotateAround(pos, axis, Time.deltaTime * 50);
-
-
-
-
-
+        push();
     }
 
-    void OnCollisionStay2D(Collision2D col)
+    public void push()
     {
-        // width = col.transform.localScale.z * col.collider.size.z;
-
-
-        if (
-            col.transform.name.Contains("road"))
+        if (transform.rotation.z > 0 && transform.rotation.z < rightpush && (body2d.angularVelocity > 0) && body2d.angularVelocity < velocity)
         {
-            Debug.Log("OnCollisionEnter2D " + col.transform.name);
-
+            body2d.angularVelocity = velocity;
         }
-
-       
-
+        else if (transform.rotation.z < 0 && transform.rotation.z > leftpush && (body2d.angularVelocity < 0) && body2d.angularVelocity > velocity * -1)
+        {
+            body2d.angularVelocity = velocity * -1;
+        }
     }
 }

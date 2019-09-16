@@ -78,7 +78,7 @@ public class hero : MonoBehaviour
         if (col.transform.name.Contains("platform")) {
             transform.parent = col.transform;
         }
-        if (col.transform.name.Contains("pika"))
+        if (col.transform.name.Contains("pika")|| col.transform.name.Contains("vundervaffel"))
         {
             rigidBody.constraints = RigidbodyConstraints2D.None;
         }
