@@ -108,7 +108,7 @@ public class hero : MonoBehaviour
     void OnCollisionExit2D(Collision2D col)
     {
         if (
-                    col.transform.name.Contains("road") ||
+                    col.transform.name.Contains("road")||
                     col.transform.name.Contains("box") ||
                     col.transform.name.Contains("platform"))
         {
