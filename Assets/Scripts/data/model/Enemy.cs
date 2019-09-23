@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     private int behevour_idle = 0;
     private int behevour_neutral = 1;
     private int behevour_atack = 2;
+    private int behevour_onPlatform = 3;
 
 
     public string name;
@@ -35,6 +36,8 @@ public class Enemy : MonoBehaviour
 
     private float idleTime = IDLE_TIME;
 
+    private bool nearEdge = false;
+
     // Use this for initialization
     void Start()
     {
@@ -47,7 +50,8 @@ public class Enemy : MonoBehaviour
         startY = transform.position.y;
 
 
-        behavour = 1;
+        behavour = 3;
+        movement = -1f;
 
     }
 
@@ -61,6 +65,7 @@ public class Enemy : MonoBehaviour
             case 0: idle(); break;
             case 1: behavourNeutral(); break;
 
+            case 3: behavourOnPlatform(); break; 
         }
 
 
@@ -92,6 +97,28 @@ public class Enemy : MonoBehaviour
         enemyAnimation.SetFloat("speed", Mathf.Abs(rigidBody.velocity.x));
        //enemyAnimation.SetBool("onGround", onGround);
     }
+
+
+    //COLLISION DETECTION=======================================================
+    void OnCollisionStay2D(Collision2D col)
+    {
+        if (col.transform.name.Contains("platform"))
+        {
+            transform.parent = col.transform;
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D col)
+    {
+        if (col.transform.name.Contains("platform"))
+        {
+            transform.parent = null;
+        }
+    }
+
+
+
+    //BEHAVOURS=======================================================
 
     private void behavourNeutral() {
         if (!flagActionDone)
@@ -131,11 +158,27 @@ public class Enemy : MonoBehaviour
        
     }
 
+    private void behavourOnPlatform() {
+
+        if (nearEdge)
+        {
+            movement = -movement;
+
+        }
+        else {
+            if (movement > 0)
+            {
+                movement = 1f;
+            }
+            else {
+                movement = -1f;
+            }
+        }
+    }
+
     private void behavourAttack() {
 
     }
-
-
 
 
     private void idle() {
@@ -144,4 +187,16 @@ public class Enemy : MonoBehaviour
    
     }
 
+
+    //EDGE COLLIDERS=======================================================
+
+    public void escapePlatform() {
+        nearEdge = true;
+    }
+
+    public void enterPlatform()
+    {
+        nearEdge = false;
+
+    }
 }
