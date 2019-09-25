@@ -38,6 +38,9 @@ public class Enemy : MonoBehaviour
 
     private bool nearEdge = false;
 
+    private bool heroClose;
+    public Vector3 heroCoordinates;
+
     // Use this for initialization
     void Start()
     {
@@ -64,7 +67,7 @@ public class Enemy : MonoBehaviour
         switch (behavour) {
             case 0: idle(); break;
             case 1: behavourNeutral(); break;
-
+            case 2: behavourAttack(); break;
             case 3: behavourOnPlatform(); break; 
         }
 
@@ -94,10 +97,12 @@ public class Enemy : MonoBehaviour
         //    rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpSpeed);
         //}
 
+        enemyAnimation.SetBool("heroClose", heroClose);
         enemyAnimation.SetFloat("speed", Mathf.Abs(rigidBody.velocity.x));
        //enemyAnimation.SetBool("onGround", onGround);
     }
 
+    
 
     //COLLISION DETECTION=======================================================
     void OnCollisionStay2D(Collision2D col)
@@ -105,6 +110,11 @@ public class Enemy : MonoBehaviour
         if (col.transform.name.Contains("platform"))
         {
             transform.parent = col.transform;
+        }
+
+        if (col.transform.name.Contains("hero"))
+        {
+            heroClose = true;
         }
     }
 
@@ -114,8 +124,35 @@ public class Enemy : MonoBehaviour
         {
             transform.parent = null;
         }
+
+        if (col.transform.name.Contains("hero"))
+        {
+            heroClose = false;
+        }
     }
 
+
+
+    //SET BEHAVOUR =======================================================
+    public void setBehavourIdle()
+    {
+        behavour = behevour_idle;
+    }
+
+    public void setBehavourNeutral()
+    {
+        behavour = behevour_neutral;
+    }
+
+    public void setBehavourAttack()
+    {
+        behavour = behevour_atack;
+    }
+
+    public void setBehavourPlatform()
+    {
+        behavour = behevour_onPlatform;
+    }
 
 
     //BEHAVOURS=======================================================
@@ -178,6 +215,22 @@ public class Enemy : MonoBehaviour
 
     private void behavourAttack() {
 
+        if (heroClose)
+        {
+            enemyAnimation.Play("attack");
+
+        }
+        else
+        {
+            if (heroCoordinates.x > transform.position.x)
+            {
+                movement = 1f;
+            }
+            else
+            {
+                movement = -1f;
+            }
+        }  
     }
 
 
