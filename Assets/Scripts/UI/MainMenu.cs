@@ -114,7 +114,7 @@ public class MainMenu : MonoBehaviour {
     public void openShop() {SceneManager.LoadScene(SHOP);}
     public void openLevelSelect() {
         //SceneManager.LoadScene(2);
-        SceneManager.LoadScene("new_new_grigorill");
+        SceneManager.LoadScene("LevelSelect");
 
     }//LEVEL_SELECT
 

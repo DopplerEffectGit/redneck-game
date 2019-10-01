@@ -46,6 +46,15 @@ public class LevelSelect : MonoBehaviour {
         SceneManager.LoadScene(MAIN_MENU);
     }
 
+    public void openLevel1()
+    {
+        SceneManager.LoadScene("hills.lvl.1");
+    }
+
+    public void openLevel2()
+    {
+        SceneManager.LoadScene("des.lvl.1");
+    }
     //public void addItemToGrid(Level level) {
 
     //    GameObject newButton = Instantiate(prefab);
