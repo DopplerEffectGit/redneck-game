@@ -18,4 +18,16 @@ public class Bullet : MonoBehaviour
     {
 
     }
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        Debug.Log("bullet " + col.name);
+
+
+        if (!col.transform.name.Contains("heroDetector"))
+        {
+            Destroy(gameObject);
+        }
+
+    }
 }

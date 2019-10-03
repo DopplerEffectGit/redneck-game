@@ -2062,7 +2062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: 
-  health: 0
+  health: 10
   demage: 0
   behavour: 0
   speed: 2

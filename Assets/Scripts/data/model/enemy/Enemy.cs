@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private int behevour_neutral = 1;
     private int behevour_atack = 2;
     private int behevour_onPlatform = 3;
+    private int behevour_gotDemage = 4;
 
 
     public string name;
@@ -68,7 +69,10 @@ public class Enemy : MonoBehaviour
             case 0: idle(); break;
             case 1: behavourNeutral(); break;
             case 2: behavourAttack(); break;
-            case 3: behavourOnPlatform(); break; 
+            case 3: behavourOnPlatform(); break;
+            //case 4: be(); break;
+
+
         }
 
 
@@ -99,12 +103,40 @@ public class Enemy : MonoBehaviour
 
         enemyAnimation.SetBool("heroClose", heroClose);
         enemyAnimation.SetFloat("speed", Mathf.Abs(rigidBody.velocity.x));
-       //enemyAnimation.SetBool("onGround", onGround);
+        //enemyAnimation.SetBool("onGround", onGround);
+
+        if (health <= 0) {
+            behavourDeath();
+        }
+
+        if (enemyAnimation.GetCurrentAnimatorStateInfo(0).IsName("death"))
+        {
+            float animationPercent = (enemyAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime % 1.0f);
+
+            Debug.Log("death animation " + animationPercent);
+            if (animationPercent > 0.9f)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 
-    
+
 
     //COLLISION DETECTION=======================================================
+
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.transform.name.Contains("bullet"))
+        {
+            health = health - 5;
+            Debug.Log("bullet OnTriggerEnter2D");
+            Debug.Log("health = " + health);
+
+        }
+    }
+
     void OnCollisionStay2D(Collision2D col)
     {
         if (col.transform.name.Contains("platform"))
@@ -134,26 +166,11 @@ public class Enemy : MonoBehaviour
 
 
     //SET BEHAVOUR =======================================================
-    public void setBehavourIdle()
-    {
-        behavour = behevour_idle;
-    }
-
-    public void setBehavourNeutral()
-    {
-        behavour = behevour_neutral;
-    }
-
-    public void setBehavourAttack()
-    {
-        behavour = behevour_atack;
-    }
-
-    public void setBehavourPlatform()
-    {
-        behavour = behevour_onPlatform;
-    }
-
+    public void setBehavourIdle() {behavour = behevour_idle;}
+    public void setBehavourNeutral() {behavour = behevour_neutral;}
+    public void setBehavourAttack(){behavour = behevour_atack;}
+    public void setBehavourPlatform() {behavour = behevour_onPlatform;}
+    public void setBehavourDemage(){behavour = behevour_gotDemage;}
 
     //BEHAVOURS=======================================================
 
@@ -240,6 +257,14 @@ public class Enemy : MonoBehaviour
    
     }
 
+    private void behavourDeath() {
+
+        enemyAnimation.Play("death");
+
+    }
+
+
+
 
     //EDGE COLLIDERS=======================================================
 
@@ -252,4 +277,6 @@ public class Enemy : MonoBehaviour
         nearEdge = false;
 
     }
+
+
 }
