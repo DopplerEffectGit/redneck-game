@@ -42,6 +42,9 @@ public class Enemy : MonoBehaviour
     private bool heroClose;
     public Vector3 heroCoordinates;
 
+    //public hero hero;
+
+
     // Use this for initialization
     void Start()
     {
@@ -119,6 +122,26 @@ public class Enemy : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+
+        if (enemyAnimation.GetCurrentAnimatorStateInfo(0).IsName("attack")) {
+
+            float animationPercent = (enemyAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime % 1.0f);
+            Debug.Log("attack animation ");
+
+            if (animationPercent > 0.5f && animationPercent < 0.51f)
+            {
+                //hero.health = -10;
+                GameObject go = GameObject.Find("hero");
+                hero heroScript = (hero)go.GetComponent(typeof(hero));
+                heroScript.health = health - 10;
+
+
+            }
+
+
+        }
+
+        
     }
 
 

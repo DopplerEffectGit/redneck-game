@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class hero : MonoBehaviour
 {
 
+    public float health = 100f;
     public float speed = 5f;
     public float jumpSpeed = 8f;
     private float movement = 0f;
@@ -14,12 +15,16 @@ public class hero : MonoBehaviour
 
     private bool onGround;
     private bool attackActive = false;
-    public ParticleSystem dust;    
+    public ParticleSystem dust;
+
+    private Vector3 respawnPoint;
 
 
     // Use this for initialization
     void Start()
     {
+        respawnPoint = gameObject.transform.position;
+
         rigidBody = GetComponent<Rigidbody2D>();
         rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         playerAnimation = GetComponent<Animator>();
@@ -73,6 +78,12 @@ public class hero : MonoBehaviour
         }
 
 
+        if (health <= 0)
+        {
+            transform.position = respawnPoint;
+            health = 100;
+        }
+
 
 
 
@@ -100,7 +111,8 @@ public class hero : MonoBehaviour
         }
         if (col.transform.name.Contains("pika")|| col.transform.name.Contains("vundervaffel"))
         {
-            rigidBody.constraints = RigidbodyConstraints2D.None;
+            //rigidBody.constraints = RigidbodyConstraints2D.None;
+            health = health - 30;
         }
 
     }
@@ -119,6 +131,17 @@ public class hero : MonoBehaviour
         if (col.transform.name.Contains("platform"))
         {
             transform.parent = null;
+        }
+    }
+
+    //TRIGGER_DETECTORS=============================================
+
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.transform.name.Contains("checkpoint"))
+        {
+            respawnPoint = col.transform.position;
+
         }
     }
 
