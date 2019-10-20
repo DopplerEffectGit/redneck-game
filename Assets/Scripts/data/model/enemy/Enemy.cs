@@ -80,6 +80,40 @@ public class Enemy : MonoBehaviour
 
 
 
+
+        if (health <= 0)
+        {
+            behavourDeath();
+        }
+
+        if (enemyAnimation.GetCurrentAnimatorStateInfo(0).IsName("death"))
+        {
+            float animationPercent = (enemyAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime % 1.0f);
+
+            Debug.Log("death animation " + animationPercent);
+            if (animationPercent > 0.9f)
+            {
+                Destroy(gameObject);
+            }
+        } else if (enemyAnimation.GetCurrentAnimatorStateInfo(0).IsName("attack"))
+        {
+            float animationPercent = (enemyAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime % 1.0f);
+            Debug.Log("attack animation ");
+
+            if (animationPercent > 0.5f && animationPercent < 0.51f)
+            {
+                //hero.health = -10;
+                GameObject go = GameObject.Find("hero");
+                hero heroScript = (hero)go.GetComponent(typeof(hero));
+                heroScript.health = health - 10;
+            }
+        }
+
+
+
+
+
+
         //movement
         if (movement > 0f)
         {
@@ -106,42 +140,14 @@ public class Enemy : MonoBehaviour
 
         enemyAnimation.SetBool("heroClose", heroClose);
         enemyAnimation.SetFloat("speed", Mathf.Abs(rigidBody.velocity.x));
+
+        enemyAnimation.SetFloat("health", health);
+
         //enemyAnimation.SetBool("onGround", onGround);
 
-        if (health <= 0) {
-            behavourDeath();
-        }
-
-        if (enemyAnimation.GetCurrentAnimatorStateInfo(0).IsName("death"))
-        {
-            float animationPercent = (enemyAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime % 1.0f);
-
-            Debug.Log("death animation " + animationPercent);
-            if (animationPercent > 0.9f)
-            {
-                Destroy(gameObject);
-            }
-        }
-
-        if (enemyAnimation.GetCurrentAnimatorStateInfo(0).IsName("attack")) {
-
-            float animationPercent = (enemyAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime % 1.0f);
-            Debug.Log("attack animation ");
-
-            if (animationPercent > 0.5f && animationPercent < 0.51f)
-            {
-                //hero.health = -10;
-                GameObject go = GameObject.Find("hero");
-                hero heroScript = (hero)go.GetComponent(typeof(hero));
-                heroScript.health = health - 10;
 
 
-            }
 
-
-        }
-
-        
     }
 
 
